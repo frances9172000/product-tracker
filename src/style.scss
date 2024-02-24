@@ -1,0 +1,357 @@
+$primary: rgb(0, 60, 255);
+$secondary: lighten($primary, 30%);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.top-nav {
+    margin-top: 2rem;
+}
+
+.nav-item {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 300px;
+    margin: 0 auto;
+    position: relative;
+
+    & > .item {
+        flex-grow: 0;
+        flex-shrink: 0;
+        height: 50px;
+        width: 50px;
+        overflow: hidden;
+        cursor: pointer;
+        outline: none;
+        position: relative;
+
+        i {
+            color: $secondary;
+            transition: 0.5s ease;
+        }
+
+        &.active {
+            .status {
+                bottom: 0;
+            }
+
+            i {
+                color: $primary;
+            }
+        }
+    }
+}
+
+.item {
+    transition: opacity 0.3s ease;
+    opacity: 1;
+    visibility: visible;
+
+    &.invisible {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.status {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    bottom: -100%;
+    left: 0;
+    background: $primary;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: 0.5s ease;
+}
+
+.nav-product,
+.nav-shopping-cart {
+    text-align: center;
+    line-height: 50px;
+
+    i {
+        transition: 0.2s ease;
+        font-size: 1.5rem;
+    }
+}
+
+.nav-search {
+    cursor: none;
+    form {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+    }
+
+    .search {
+        height: 50px;
+        width: 50px;
+        border: none;
+        outline: none !important;
+        background: none;
+        cursor: pointer;
+        text-align: center;
+        line-height: 50px;
+    }
+
+    i {
+        transition: 0.2s ease;
+        font-size: 1.5rem;
+    }
+
+    &:hover {
+        i {
+            color: $primary;
+        }
+    }
+}
+
+.nav-add-product {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .button {
+        height: 30px;
+        width: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: $secondary;
+        transition: 0.2s ease;
+
+        i {
+            color: #fff;
+        }
+
+        &:hover {
+            background: $primary;
+        }
+    }
+
+    &.active {
+        i {
+            color: #fff !important;
+        }
+
+        .button {
+            background: $primary;
+        }
+    }
+}
+
+.search-bar {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &.active {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    form {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .search-close {
+        height: 30px;
+        width: 30px;
+        text-align: center;
+        line-height: 30px;
+    }
+
+    input {
+        border: none;
+        outline: none
+    }
+
+    .search-close:hover,
+    .search-btn:hover {
+        color: $primary;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .search-close,
+    .search-btn {
+        color: $secondary;
+    }
+}
+
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+
+    &.active {
+        margin-bottom: 320px;
+    }
+
+    .searched-product {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 1.5rem;
+
+        & > div {
+            width: 300px;
+            flex-shrink: 0;
+            margin: 0.5rem;
+            padding: 1rem;
+            left: -5%;
+            position: relative;
+            border: 2px solid $secondary;
+            opacity: 0;
+            transition: background-color 0.3s ease, opacity 0.5s ease,
+                left 0.5s ease;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+
+            .product-actions {
+                grid-row: 2/3;
+                grid-column: 2/3;
+                text-align: center;
+            }
+
+            .product-name {
+                grid-row: 1/3;
+            }
+
+            &:hover {
+                background: $secondary;
+                p,
+                h1 {
+                    color: #fff;
+                }
+            }
+
+            &.active {
+                left: 0;
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            text-align: right;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .searched-match {
+            background: rgb(235, 235, 42);
+        }
+    }
+}
+
+.added {
+    background: #f4f4f4;
+    margin-top: 1.5rem;
+    transition: 0.5s ease;
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    height: 300px;
+    width: 100%;
+    box-shadow: 2px 0px 7px 1px #ccc;
+    display: grid;
+    grid-template-rows: 1fr max(90px);
+
+    &.active {
+        bottom: 0;
+    }
+
+    &-product {
+        overflow-y: auto;
+        padding-top: 0rem;
+        padding-bottom: 1rem;
+
+        th,
+        td {
+            text-align: center;
+            padding: 0.5rem 1rem
+        }
+
+        input {
+            text-align: center
+        }
+    }
+
+    &-info {
+        background: #fff;
+        box-shadow: 2px 0px 7px 1px #ccc;
+        width: 100%;
+        overflow-y: auto;
+        display: flex;
+        align-items: center;
+
+        & > div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .order-total {
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+
+            .total-price {
+                text-decoration: underline;
+            }
+        }
+
+        .order-action {
+            align-self: flex-end;
+        }
+    }
+}
+
+@media (max-width: 560px) {
+    .nav-product,
+    .nav-search,
+    .nav-shopping-cart {
+        i {
+            font-size: 1.3rem;
+        }
+    }
+
+    .nav-item {
+        max-width: 200px;
+    }
+
+    .item {
+        margin: 0.3rem;
+    }
+
+    .searched-product {
+        & > div {
+            padding: 0.5rem !important;
+            width: 100% !important;
+            margin: 0.3rem !important;
+        }
+    }
+}

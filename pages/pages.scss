@@ -1,0 +1,46 @@
+$primary: rgb(0, 60, 255);
+$secondary: lighten($primary, 30%);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+   display: flex;
+   justify-content: center
+}
+
+.login {
+   width: 400px;
+
+   .header {
+      text-align: center;
+      font-size: 2rem;
+      color: $primary;
+       span {
+          font-weight: 800
+       }
+   }
+
+   .input-field input:focus + label {
+     color: #000 !important
+   }
+
+   .input-field input:focus {
+      border-bottom: 1px solid $primary !important;
+      box-shadow: 0 1px 0 0 $primary !important
+   }
+
+   button {
+      background: $primary;
+      margin: 1rem 0
+   }
+
+   .remember {
+      span {
+         color: #000 !important
+      }
+   }
+}
